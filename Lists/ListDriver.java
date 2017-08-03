@@ -22,6 +22,7 @@ public class ListDriver {
 	private static MyArrayList myArrayList;
 
 	/** Keeps track of the Linkedlist */
+	private static MyLinkedList myLinkedList;
 
 	// run only once when the class is loaded 
 	static {
@@ -71,7 +72,9 @@ public class ListDriver {
 
 	/** Runs the Linkedlist functionality */
 	private static void runLinkedList() {
-
+		myLinkedList = new MyLinkedList();
+		listType = "Node";		
+		runListPrompt();
 	}
 
 	/** Runs the general prompt for the list */
@@ -89,36 +92,64 @@ public class ListDriver {
 				response = myScanner.next();
 				try {
 					int index = Integer.parseInt(response);
-					myArrayList.add(currentNumber, index);
+					if(listType.equalsIgnoreCase("array")) {
+						myArrayList.add(currentNumber, index);
+					} else {
+						myLinkedList.add(currentNumber, index);
+					}					
 				} catch(NumberFormatException e) {
 					System.out.println("Looks like we'll add the item to the end of the list.");
-					myArrayList.add(currentNumber);
+					if(listType.equalsIgnoreCase("array")) {
+						myArrayList.add(currentNumber);
+					} else {
+						myLinkedList.append(currentNumber);
+					}					
 				}
 			} else if(response.equalsIgnoreCase("get")) {
 				try {
 					System.out.println("What index would you like to get?");
 					currentNumber = Integer.parseInt(myScanner.next());
-					System.out.println("The item at index " + currentNumber 
+					if(listType.equalsIgnoreCase("array")) {
+						System.out.println("The item at index " + currentNumber 
 						+ " is " + myArrayList.getItem(currentNumber));
+					} else {
+						System.out.println("The item at index " + currentNumber 
+						+ " is " + myLinkedList.get(currentNumber));
+					}						
 				} catch(NumberFormatException e){
 					System.out.println("Sorry but you entered a value that couldn't "
 						+ "be interpreted as a number");
 				}
 			} else if(response.equalsIgnoreCase("size")) {
-				System.out.println("There are currently " + myArrayList.getSize() 
-					+ " items in the list");
+				if(listType.equalsIgnoreCase("array")) {
+					System.out.println("There are currently " + myArrayList.getSize() 
+						+ " items in the list");
+				} else {
+					System.out.println("There are currently " + myLinkedList.getSize() 
+						+ " items in the list");
+				}
 			} else if(response.equalsIgnoreCase("remove")){ 
 				try {
 					System.out.println("What is the item to be removed?");
 					currentNumber = Integer.parseInt(myScanner.next());
-					String saying = myArrayList.remove(currentNumber) ? "Successfully removed number!" :
-					"Couldn't remove the number! ):";
+					String saying;
+					if(listType.equalsIgnoreCase("array")) {
+						saying = myArrayList.remove(currentNumber) ? "Successfully removed number!" :
+						"Couldn't remove the number! ):";
+					} else {
+						saying = myLinkedList.remove(currentNumber) ? 
+						"Successfully removed number!" : "Couldn't remove the number! ):";
+					}
 					System.out.println(saying);
 				} catch(NumberFormatException e) {	
 					System.out.println("Sorry but that's not an item that I recognize! >:(");
 				}
 			}
-			System.out.println(myArrayList.toString());
+			if(listType.equalsIgnoreCase("array")) {
+				System.out.println(myArrayList.toString());
+			} else {
+				System.out.println(myLinkedList.toString());
+			}			
 		}
 	}
 }
