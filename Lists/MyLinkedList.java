@@ -134,6 +134,65 @@ public class MyLinkedList {
 	}
 
 	/** 
+	 * Method that checks to see if a loop exists within the linked list
+	 *
+	 * @return True if a loop can be found, false otherwise */
+	public boolean loopExists() {
+		// check the very first frontal case
+		if(front.next == null) {
+			return false;
+		}
+		Node first, second;
+		first = front;
+		second = front.next;		
+		while(second != null && first != null) {
+			// loop has been detected
+			if(first.equals(second)) {
+				return true;
+			}
+			first = first.getNext();
+			second = second.getNext().getNext();
+		}
+		return false;
+	}
+
+	/** 
+	 * Method that checks to see where the start of a loop exist
+	 * 
+	 * @return The node where the loop occurred at */
+	public Node startOfLoop() {
+		if(front.next == null) {
+			return null;
+		}
+
+		boolean loopFound = false;
+
+		Node first = front, second = front.next;	
+		while(second != null && first != null) {
+			if(first.equals(second)) {
+				loopFound = true;
+				break;
+			}
+			first = first.getNext();
+			second = second.getNext().getNext();
+		}
+		if(loopFound) {
+			// check to find where the loop starts
+			// each node is 'k' distance from the start of the loop, and the start of the loop
+			// is 'k' steps away from the beginning 
+			first = front;	
+			second = second.getNext();		
+			while(!first.equals(second)) {
+				first = first.getNext();
+				second = second.getNext();
+			}
+			return first;
+		} else {
+			return null;
+		}
+	}
+
+	/** 
 	 * Gets the string version of the list
 	 * 
 	 * @return The string representation of this list */
