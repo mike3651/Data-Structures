@@ -28,19 +28,20 @@ public class SearchAndSort {
 		valid = false;
 	}
 
-	public static void main(final String[] args){		
+	public static void main(final String[] args) throws Exception{
+		Thread.sleep(50);		
 		do {
 			try {
 				System.out.println("How many elements would you like to put into an array?");
 				integer_response = myScan.nextInt();
-			} catch(NumberFormatException e) {
-				System.out.println("Sorry but it looks like that isn't a vaild number, " + 
-					"please try again. ):");
-			} finally {
 				valid = true;				
 				System.out.println("Looks like a great number to me! :)");
+			} catch(InputMismatchException e) {
+				System.out.println("Sorry but it looks like that isn't a vaild number, " + 
+					"please try again. ):");
 			}
-		} while(!valid);		
+		} while(!valid);
+		System.out.println(valid);
 
 		valid = false;
 		generateCollection();
@@ -50,7 +51,7 @@ public class SearchAndSort {
 			+ "\nWould you like to search or sort?");
 
 		// Since we are only dealing with search for now we will assume that the user 
-		// would like to search through the array 
+		// would like to search through the array 		
 		System.out.println("Would you like to run linear search or binary search?");
 		string_response = myScan.next();
 		System.out.println("What number would you like to find?");
