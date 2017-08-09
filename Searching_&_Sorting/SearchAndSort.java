@@ -29,49 +29,42 @@ public class SearchAndSort {
 	}
 
 	public static void main(final String[] args) throws Exception{
-		// do {
-		// 	try {
-		// 		System.out.println("How many elements would you like to put into an array?");
-		// 		integer_response = myScan.nextInt();
-		// 		valid = true;				
-		// 		System.out.println("Looks like a great number to me! :)");
-		// 	} catch(InputMismatchException e) {
-		// 		System.out.println("Sorry but it looks like that isn't a vaild number, " + 
-		// 			"please try again. ):");
-		// 	}
-		// } while(!valid);
-		// System.out.println(valid);
+		do {
+			try {
+				System.out.println("How many elements would you like to put into an array?");
+				integer_response = myScan.nextInt();
+				valid = true;				
+				System.out.println("Looks like a great number to me! :)");
+			} catch(InputMismatchException e) {
+				System.out.println("Sorry but it looks like that isn't a vaild number, " + 
+					"please try again. ):");
+			}
+		} while(!valid);
+		System.out.println(valid);
 
-		// valid = false;
-		// generateCollection();
-		// System.out.println("Here is what the array looks like: " 
-		// 	+ toStringArray(myArray));
-		// System.out.println("Generating a collection of size " + integer_response 
-		// 	+ "\nWould you like to search or sort?");
-
-		// // Since we are only dealing with search for now we will assume that the user 
-		// // would like to search through the array 		
-		// System.out.println("Would you like to run linear search or binary search?");
-		// string_response = myScan.next();
-		// System.out.println("What number would you like to find?");
-		// integer_response = myScan.nextInt();
-		// if(string_response.equals("binary")) {
-		// 	// sort the collection
-		// 	selectionSort(myArray);			
-		// 	System.out.println("The array has been sorted and looks like "
-		// 		+ toStringArray(myArray));
-		// } 
-
-		// returnValue = string_response.equals("binary") 
-		// ? binarySearch(myArray, integer_response) : linearSearch(myArray, integer_response);
-		// System.out.println("The item was found at index: " + returnValue);
-		System.out.println("How many elements would you like to put into an array?");
-		integer_response = myScan.nextInt();
+		valid = false;
 		generateCollection();
-		System.out.println("Array before sorting: " + toStringArray(myArray));
-		insertionSort(myArray);
-		System.out.println("Array after sorting: " + toStringArray(myArray));
+		System.out.println("Here is what the array looks like: " 
+			+ toStringArray(myArray));
+		System.out.println("Generating a collection of size " + integer_response 
+			+ "\nWould you like to search or sort?");
 
+		// Since we are only dealing with search for now we will assume that the user 
+		// would like to search through the array 		
+		System.out.println("Would you like to run linear search or binary search?");
+		string_response = myScan.next();
+		System.out.println("What number would you like to find?");
+		integer_response = myScan.nextInt();
+		if(string_response.equals("binary")) {
+			// sort the collection
+			selectionSort(myArray);			
+			System.out.println("The array has been sorted and looks like "
+				+ toStringArray(myArray));
+		} 
+
+		returnValue = string_response.equals("binary") 
+		? binarySearch(myArray, integer_response) : linearSearch(myArray, integer_response);
+		System.out.println("The item was found at index: " + returnValue);		
 	}
 
 	/** Function that generates an array of random numbers */
