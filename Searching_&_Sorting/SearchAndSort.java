@@ -29,7 +29,6 @@ public class SearchAndSort {
 	}
 
 	public static void main(final String[] args) throws Exception{
-		Thread.sleep(50);		
 		do {
 			try {
 				System.out.println("How many elements would you like to put into an array?");
