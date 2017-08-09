@@ -134,6 +134,14 @@ public class MyLinkedList {
 	}
 
 	/** 
+	 * Gets the start of this list 
+	 * 
+	 * @return The front of this list */
+	public Node getFront() {
+		return front;
+	}
+
+	/** 
 	 * Method that checks to see if a loop exists within the linked list
 	 *
 	 * @return True if a loop can be found, false otherwise */
@@ -191,6 +199,42 @@ public class MyLinkedList {
 			return null;
 		}
 	}
+
+	/** 
+	 * Checks to see if this linked list overlaps with another one 
+	 *
+	 * @param other The other linked list
+	 * @return The intersection node, null if it doesn't exist */
+	public Node getIntersection(MyLinkedList other) {
+		int other_size = other.getSize();
+		int difference = Math.abs(size - other_size);
+		Node current = null, other_current = null;
+		if(size > other_size) {
+			// traverse through my end since I have the longer trailing nodes
+			current = front;
+			for(int i = 0; i < difference; i++) {
+				current = current.getNext();
+			}			
+		} else {
+			// traverse through the other end since I have the longer trailing nodes
+			other_current = other.getFront();
+			for(int i = 0; i < difference; i++) {
+				other_current = other_current.getNext();
+			}			
+		}
+		current = current == null ? front : current;
+		other_current = other_current == null ? other.getFront() : other_current;
+
+		// loop through both in parallel
+		while(current != null && other_current != null) {
+			// found the overlap
+			if(current.equals(other_current)) {
+				return current;
+			}
+		}
+		return null;
+	}
+
 
 	/** 
 	 * Gets the string version of the list
